@@ -102,7 +102,10 @@ def pos_stone_color(board, row, col)
 end
 
 def finished?(board)
-  false
+  return true unless board.flatten.uniq.include?(BLANK_CELL)
+  return false if placeable?(board, WHITE_STONE)
+  return false if placeable?(board, BLACK_STONE)
+  true # 白黒どちらも配置不可
 end
 
 def placeable?(board, attack_stone_color)

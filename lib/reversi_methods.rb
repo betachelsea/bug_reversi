@@ -77,6 +77,7 @@ end
 # target_posはひっくり返す対象セル
 def turn!(board, target_pos, attack_stone_color, direction)
   return false if target_pos.out_of_board?
+  return false if pos_stone_color(board, target_pos.row, target_pos.col) == BLANK_CELL
 
   next_pos = target_pos.next_position(direction)
   next_stone = pos_stone_color(board, next_pos.row, next_pos.col)

@@ -52,8 +52,11 @@ class TestReversi < Minitest::Test
   end
 
   def test_finished?
-    assert_equal finished?(build_board('pattern03a.txt')), true
-    assert_equal finished?(build_board('pattern03b.txt')), false
-    assert_equal finished?(build_board('pattern03c.txt')), true
+    assert_equal finished?(build_board('pattern00.txt')), false # 初期盤面
+    assert_equal finished?(build_board('pattern03a.txt')), true # 全て埋まった
+    assert_equal finished?(build_board('pattern03b.txt')), true # 白最短勝利
+    assert_equal finished?(build_board('pattern03c.txt')), true # 黒最短勝利
+    assert_equal finished?(build_board('pattern03d.txt')), false # 白配置可・黒配置不可
+    assert_equal finished?(build_board('pattern03e.txt')), false # 白配置不可・黒配置可
   end
 end

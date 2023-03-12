@@ -57,7 +57,7 @@ def put_stone!(board, cellstr, stone_color, execute = true) # rubocop:disable St
   turn_succeed = false
   DIRECTIONS.each do |direction|
     next_pos = pos.next_position(direction)
-    next_pos_color = pos_stone_color(copied_board, next_pos.col, next_pos.row)
+    next_pos_color = pos_stone_color(copied_board, next_pos.row, next_pos.col)
     next if next_pos_color == stone_color
 
     turn_succeed = true if turn!(copied_board, next_pos, stone_color, direction)
@@ -71,6 +71,7 @@ end
 # target_posはひっくり返す対象セル
 def turn!(board, target_pos, attack_stone_color, direction)
   return false if target_pos.out_of_board?
+  return false if pos_stone_color(board, target_pos.row, target_pos.col) == BLANK_CELL
 
   next_pos = target_pos.next_position(direction)
   next_stone = pos_stone_color(board, next_pos.row, next_pos.col)
@@ -95,7 +96,7 @@ def pos_stone_color(board, row, col)
 end
 
 def finished?(board)
-  false
+  !placeable?(board, WHITE_STONE) && !placeable?(board, BLACK_STONE)
 end
 
 def placeable?(board, attack_stone_color)

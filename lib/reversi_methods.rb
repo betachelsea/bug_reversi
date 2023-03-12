@@ -96,7 +96,7 @@ def pos_stone_color(board, row, col)
 end
 
 def finished?(board)
-  false
+  !placeable?(board, WHITE_STONE) && !placeable?(board, BLACK_STONE)
 end
 
 def placeable?(board, attack_stone_color)
